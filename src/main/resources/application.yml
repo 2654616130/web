@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: customer-web
+  redis:
+    host: 192.168.159.130
+    port: 6379
+    password: test1234
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/web
+    username: root
+    password: root
+  mail:
+    host: smtp.163.com
+    username: 18638631903@163.com
+    password: XBOGWGHQKIRCEDVK
+    properties: {
+      "mail.smtp.auth":"true",
+      "mail.smtp.starttls.enable":"true",
+      "mail.smtp.starttls.required":"true"
+    }
+server:
+  port: 8080
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    local-cache-scope: statement
