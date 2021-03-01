@@ -23,7 +23,7 @@ public class MailController {
 
     @GetMapping("/send")
     public String list() {
-        mailService.
+        mailService.sendMail();
         return "success";
     }
 
