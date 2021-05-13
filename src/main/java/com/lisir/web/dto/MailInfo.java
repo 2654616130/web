@@ -1,4 +1,4 @@
-package com.lisir.web.dao;
+package com.lisir.web.dto;
 
 /**
  * @Description

@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestContrller {
 
+
+//    @PreAuthorize("hasAuthority('system_admin')")
     @GetMapping("/test")
     public String test(){
-
         return "hello, docker";
     }
 

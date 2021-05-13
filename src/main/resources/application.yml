@@ -2,9 +2,8 @@ spring:
   application:
     name: customer-web
   redis:
-    host: 192.168.159.130
+    host: 127.0.0.1
     port: 6379
-    password: test1234
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/web
@@ -28,3 +27,9 @@ mybatis:
     default-fetch-size: 100
     default-statement-timeout: 30
     local-cache-scope: statement
+auth:
+  ignore-urls:
+    - /auth/login
+    - /auth/regeist
+    - /test/**
+    - /favicon.ico
