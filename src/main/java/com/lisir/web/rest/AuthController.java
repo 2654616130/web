@@ -32,8 +32,8 @@ public class AuthController {
         return userService.login(user.getUsername(), user.getPassword());
     }
 
-    @PutMapping("/regeist")
-    public String regeist(@RequestBody SysUser user){
+    @PutMapping("/sign/up")
+    public String signIn(@RequestBody SysUser user){
         userService.regeist(user);
         return "恭喜你, 注册成功, 请前往登陆页面登陆";
     }
