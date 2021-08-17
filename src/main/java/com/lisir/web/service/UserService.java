@@ -1,8 +1,8 @@
 package com.lisir.web.service;
 
-import com.alibaba.fastjson.JSON;
 import com.lisir.web.dao.SysUserDao;
 import com.lisir.web.entity.SysUser;
+import com.lisir.web.exception.ParamErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,18 +30,22 @@ public class UserService {
     public String login(String username, String password){
         SysUser sysUser = userDao.queryById(username);
         if(sysUser == null){
-            throw new RuntimeException("请检查用户名是否正确");
+            throw new ParamErrorException("请检查用户名是否正确");
         }
         if(!passwordEncoder.matches(password, sysUser.getPwd())){
-            throw new RuntimeException("请检查密码是否正确");
+            throw new ParamErrorException("请检查密码是否正确");
         }
         String token = UUID.randomUUID().toString().replaceAll("-", "");
         redisTemplate.opsForValue().set(token, username, 10, TimeUnit.MINUTES);
         return token;
     }
 
-    public void regeist(SysUser sysUser){
+    public void register(SysUser sysUser){
         sysUser.setPwd(passwordEncoder.encode(sysUser.getPwd()));
         userDao.insert(sysUser);
+    }
+
+    public void logout(String token) {
+        redisTemplate.delete(token);
     }
 }

@@ -24,7 +24,7 @@ public class ExceptionConfig {
     @ExceptionHandler(ParamErrorException.class)
     public ResponseEntity<Object> handleParamErrorException(Exception e, WebRequest request){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<String, Object>(){{
-            put("type", "param error");
+            put("type", "请求参数异常");
             put("time", new Date());
             put("path", ((ServletWebRequest)request).getRequest().getRequestURI());
             put("message", e.getMessage());
@@ -34,7 +34,7 @@ public class ExceptionConfig {
     @ExceptionHandler(AuthenticationErrorException.class)
     public ResponseEntity<Object> handleAuthenticationErrorException(Exception e, WebRequest request){
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new HashMap<String, Object>(){{
-            put("type", "authentication error");
+            put("type", "用户认证异常");
             put("time", new Date());
             put("path", ((ServletWebRequest)request).getRequest().getRequestURI());
             put("message", e.getMessage());

@@ -1,12 +1,15 @@
 package com.lisir.web.rest;
 
 import com.lisir.web.dto.LoginUser;
+import com.lisir.web.dto.Message;
 import com.lisir.web.entity.SysUser;
 import com.lisir.web.exception.ParamErrorException;
 import com.lisir.web.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Description
@@ -34,7 +37,14 @@ public class AuthController {
 
     @PutMapping("/sign/up")
     public String signIn(@RequestBody SysUser user){
-        userService.regeist(user);
+        userService.register(user);
         return "恭喜你, 注册成功, 请前往登陆页面登陆";
+    }
+
+    @GetMapping("/logout")
+    public Message logout(HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        userService.logout(token);
+        return new Message("注销成功");
     }
 }
